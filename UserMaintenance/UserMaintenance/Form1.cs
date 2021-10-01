@@ -56,5 +56,14 @@ namespace UserMaintenance
                 }
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var id = listBox1.SelectedValue;
+            var torles = from u in users
+                         where u.ID.Equals(id)
+                         select u;
+            users.Remove(torles.FirstOrDefault());
+        }
     }
 }
