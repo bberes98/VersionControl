@@ -12,9 +12,19 @@ namespace _4.hét_IRF_FK2KYX
 {
     public partial class Form1 : Form
     {
+        RealEstateEntities context = new RealEstateEntities();
+        List<Flat> Flat;
+
         public Form1()
         {
             InitializeComponent();
+            LoadData();
+
+        }
+
+        void LoadData()
+        {
+            Flat = context.Flat.ToList();
         }
     }
 }
