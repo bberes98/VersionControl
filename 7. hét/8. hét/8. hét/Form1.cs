@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _8.hét.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,42 +13,77 @@ namespace _8.hét
 {
     public partial class Form1 : Form
     {
-        private List<Ball> _balls = new List<Ball>();
+        private List<Toy> _toys = new List<Toy>();
+        private IToyFactory _factory;
+        private Toy _nextToy;
 
-        private BallFactory _factory;
-        public BallFactory Factory
+        public IToyFactory Factory
         {
             get { return _factory; }
-            set { _factory = value; }
+            set
+            {
+                _factory = value;
+                DisplayNext();
+            }
         }
 
         public Form1()
         {
             InitializeComponent();
             Factory = new BallFactory();
+            Factory = new CarFactory();
         }
         private void createTimer_Tick(object sender, EventArgs e)
         {
             var ball = Factory.CreateNew();
-            _balls.Add(ball);
+            _toys.Add(ball);
             ball.Left = -ball.Width;
             mainPanel.Controls.Add(ball);
         }
         private void conveyorTimer_Tick(object sender, EventArgs e)
         {
             var maxPosition = 0;
-            foreach (var ball in _balls)
+            foreach (var toy in _toys)
             {
-                ball.MoveBall();
-                if (ball.Left > maxPosition)
-                    maxPosition = ball.Left;
+                toy.MoveToy();
+                if (toy.Left > maxPosition)
+                    maxPosition = toy.Left;
             }
 
             if (maxPosition > 1000)
             {
-                var oldestBall = _balls[0];
+                var oldestBall = _toys[0];
                 mainPanel.Controls.Remove(oldestBall);
-                _balls.Remove(oldestBall);
+                _toys.Remove(oldestBall);
             }
         }
+        private void DisplayNext()
+        {
+            if (_nextToy != null) Controls.Remove(_nextToy);
+            _nextToy = Factory.CreateNew();
+            _nextToy.Top = label1.Top + label1.Height + 20;
+            _nextToy.Left = label1.Left;
+            Controls.Add(_nextToy);
+        }
+
+        private void btnSelectCar_Click(object sender, EventArgs e)
+        {
+            Factory = new CarFactory();
+        }
+
+        private void btnSelectBall_Click(object sender, EventArgs e)
+        {
+            Factory = new BallFactory();
+        }
+        private void btnColor_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var colorPicker = new ColorDialog();
+
+            colorPicker.Color = button.BackColor;
+            if (colorPicker.ShowDialog() != DialogResult.OK)
+                return;
+            button.BackColor = colorPicker.Color;
+        }
+    }
 }
