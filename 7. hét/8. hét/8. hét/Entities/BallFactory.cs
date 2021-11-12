@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace _8.hét.Entities
+namespace _8.hét
 {
-    class BallFactory
+    public class BallFactory
     {
         public Ball CreateNew()
         {
