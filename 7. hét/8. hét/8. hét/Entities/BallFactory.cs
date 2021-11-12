@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _8.hét.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +8,9 @@ using System.Windows.Forms;
 
 namespace _8.hét
 {
-    public class BallFactory
+    public class BallFactory : IToyFactory
     {
-        public Ball CreateNew()
+        public Toy CreateNew()
         {
             return new Ball();
         }
