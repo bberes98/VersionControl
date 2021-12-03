@@ -25,10 +25,9 @@ namespace _9.Hét_FK2KYX
 
             for (int year = 2005; year <= 2024; year++)
             {
-                // Végigmegyünk az összes személyen
+
                 for (int i = 0; i < Population.Count; i++)
                 {
-                    // Ide jön a szimulációs lépés
                 }
 
                 int nbrOfMales = (from x in Population
