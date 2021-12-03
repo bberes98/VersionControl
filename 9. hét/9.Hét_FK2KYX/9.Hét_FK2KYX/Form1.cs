@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _9.Hét_FK2KYX.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,5 +17,9 @@ namespace _9.Hét_FK2KYX
         {
             InitializeComponent();
         }
+
+        List<Person> Population = new List<Person>();
+        List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
+        List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
     }
 }
