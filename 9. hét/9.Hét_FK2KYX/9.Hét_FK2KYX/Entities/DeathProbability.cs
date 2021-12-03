@@ -12,6 +12,6 @@ namespace _9.Hét_FK2KYX.Entities
 
         public int age { get; set; }
 
-        public int Gender { get; set; }
+        public Gender Gender { get; set; }
     }
 }

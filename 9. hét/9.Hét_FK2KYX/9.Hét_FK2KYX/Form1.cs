@@ -103,7 +103,7 @@ namespace _9.Hét_FK2KYX
                     var line = sr.ReadLine().Split(';');
                     deathprob.Add(new DeathProbability()
                     {
-                        Gender = int.Parse(line[0]),
+                        Gender = 0,
                         age = int.Parse(line[1]),
                         pDeath = double.Parse(line[2])
                     });
@@ -113,6 +113,36 @@ namespace _9.Hét_FK2KYX
             return deathprob;
         }
 
+        private void SimStep(int year, Person person)
+        {
+            if (!person.IsAlive) return;
 
+            byte age = (byte)(year - person.BirthYear);
+
+            double pDeath = (from x in DeathProbabilities
+                             where x.Gender == person.Gender && x.age == age
+                             select x.pDeath).FirstOrDefault();
+
+            if (rng.NextDouble() <= pDeath)
+                person.IsAlive = false;
+
+
+            if (person.IsAlive && person.Gender == Gender.Female)
+            {
+
+                double pBirth = (from x in BirthProbabilities
+                                 where x.age == age
+                                 select x.pBirth).FirstOrDefault();
+
+                if (rng.NextDouble() <= pBirth)
+                {
+                    Person újszülött = new Person();
+                    újszülött.BirthYear = year;
+                    újszülött.NbrOfChildren = 0;
+                    újszülött.Gender = (Gender)(rng.Next(1, 3));
+                    Population.Add(újszülött);
+                }
+            }
+        }
     }
 }
