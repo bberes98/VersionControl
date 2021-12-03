@@ -27,6 +27,7 @@ namespace _9.Hét_FK2KYX
         List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
         List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
 
+        Random rng = new Random(1234);
 
         public List<Person> GetPopulation(string csvpath)
         {
@@ -48,5 +49,51 @@ namespace _9.Hét_FK2KYX
 
             return population;
         }
+
+        //ezeket az inconsistent accesibility hibákat nem értem
+
+        public List<BirthProbability> GetBirthProbabilities(string csvpath)
+        {
+            List<BirthProbability> birthprob = new List<BirthProbability>();
+
+            using (StreamReader sr = new StreamReader(csvpath, Encoding.Default))
+            {
+                while (!sr.EndOfStream)
+                {
+                    var line = sr.ReadLine().Split(';');
+                    birthprob.Add(new BirthProbability()
+                    {
+                        age = int.Parse(line[0]),
+                        NbrOfChildren = int.Parse(line[1]),
+                        pBirth = double.Parse(line[2])
+                    });
+                }
+            }
+
+            return birthprob;
+        }
+        //és itt is ugyan ez:
+        public List<DeathProbability> GetDeathProbabilities(string csvpath)
+        {
+            List<DeathProbability> deathprob = new List<DeathProbability>();
+
+            using (StreamReader sr = new StreamReader(csvpath, Encoding.Default))
+            {
+                while (!sr.EndOfStream)
+                {
+                    var line = sr.ReadLine().Split(';');
+                    deathprob.Add(new DeathProbability()
+                    {
+                        Gender = int.Parse(line[0]),
+                        age = int.Parse(line[1]),
+                        pDeath = double.Parse(line[2])
+                    });
+                }
+            }
+
+            return deathprob;
+        }
+
+
     }
 }

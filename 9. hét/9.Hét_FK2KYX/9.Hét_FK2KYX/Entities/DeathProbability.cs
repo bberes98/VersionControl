@@ -10,7 +10,7 @@ namespace _9.Hét_FK2KYX.Entities
     {
         public double pDeath { get; set; }
 
-        public int MyProperty { get; set; }
+        public int age { get; set; }
 
         public int Gender { get; set; }
     }
