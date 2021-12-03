@@ -17,6 +17,10 @@ namespace _9.Hét_FK2KYX
         public Form1()
         {
             InitializeComponent();
+
+            Population = GetPopulation(@"C:\Temp\nép.csv");
+            BirthProbabilities = GetBirthProbabilities(@"C:\Temp\születés.csv");
+            DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");
         }
 
         List<Person> Population = new List<Person>();
