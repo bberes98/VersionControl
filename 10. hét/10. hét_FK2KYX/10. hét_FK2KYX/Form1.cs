@@ -65,6 +65,7 @@ namespace _10.hét_FK2KYX
                 else
                     gc.AddPlayer(b.Mutate());
             }
+            gc.Start();
         }
     }
 }
