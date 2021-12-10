@@ -21,8 +21,8 @@ namespace _10.hét_FK2KYX
             InitializeComponent();
             ga = gc.ActivateDisplay();
             this.Controls.Add(ga);
-            gc.AddPlayer();
-            gc.Start(true);
+            //gc.AddPlayer();
+            //gc.Start(true);
         }
     }
 }
